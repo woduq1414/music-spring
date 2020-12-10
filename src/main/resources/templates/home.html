@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+    <script src="https://kit.fontawesome.com/43798b0c81.js" crossorigin="anonymous"></script>
+
+
+    <script src="https://kit.fontawesome.com/43798b0c81.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap" rel="stylesheet">
+
+    <link href="resources/css/default.css" rel="stylesheet">
+</head>
+<body>
+<div id="wrapper">
+    <div id="indexContainer" class="shadowContainer">
+        <p id="title">
+            Music Spring
+        </p>
+        <br>
+        <div id="searchWrapper" class="">
+
+            <div class="btn-group" id="searchCategoryDropdown" data="title">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    제목
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item" type="button" data="title">제목</button>
+                    <button class="dropdown-item" type="button" data="artist">아티스트</button>
+                </div>
+            </div>
+
+
+            <input class="" id="searchInputContent">
+
+
+            <div class="" id="searchButton">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </div>
+
+
+        </div>
+        <button type="button" class="btn btn-outline-primary goWriteButton">음악 추가</button>
+
+
+    </div>
+
+</div>
+
+<script>
+
+    $(".goWriteButton").on("click", function () {
+        location.href = `/music/write`;
+    })
+
+
+    function search() {
+        location.href = `/search?q=${$("#searchInputContent").val().trim()}&type=${$("#searchCategoryDropdown").attr("data".trim())}`
+    }
+
+    $("#searchCategoryDropdown .dropdown-item").on("click", function () {
+        $("#searchCategoryDropdown").attr("data", $(this).attr("data"))
+        // alert($(this).text())
+        $("#searchCategoryDropdown .dropdown-toggle").text($(this).text())
+    })
+
+
+    $("#searchInputContent").on("keyup", function (key) {
+
+
+        if (key.keyCode === 13) {
+            search();
+        }
+    })
+
+
+    $("#searchButton").on("click", function () {
+        search();
+    })
+
+
+</script>
+</body>
+</html>

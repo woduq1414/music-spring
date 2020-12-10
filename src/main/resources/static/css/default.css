@@ -1,0 +1,221 @@
+html {
+    font-size: 16px;
+}
+
+
+@media screen and (max-width: 768px) {
+    html {
+        font-size: 11px;
+    }
+
+}
+
+.shadowContainer {
+    box-shadow: 0px 0px 8px -5px rgba(0, 0, 0, 0.3);
+
+}
+
+html, body, main {
+    font-family: 'Noto Serif KR', serif;
+}
+
+html,
+body, main {
+    height: 100%;
+    width: 100%;
+    font-family: 'Noto Serif KR', serif;
+}
+
+#wrapper {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+}
+
+
+#indexContainer {
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    margin: 10px 15px;
+    padding: 2rem 2rem 0 2rem;
+}
+
+#title {
+    margin: 0 auto;
+    font-size: 2rem;
+}
+
+
+
+#searchContainer {
+
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 15px;
+    margin: 0rem auto;
+    margin-bottom: 1rem;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    /*border : 2px solid grey;*/
+    box-shadow: 0px 0px 8px -5px rgba(0, 0, 0, 0.3);
+
+    /*background-color: var(--primary-color-bright);*/
+}
+
+
+#searchWrapper {
+    width: 90%;
+    /*height: 50px;*/
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 0px 8px -5px rgba(0, 0, 0, 0.3);
+    border-radius: 1rem;
+    cursor: pointer;
+
+    background-color: #f9f9f9
+
+}
+
+#searchButton {
+    text-align: right;
+    cursor: pointer;
+}
+
+#searchInput {
+
+}
+
+#searchInputReal {
+    border: 0;
+}
+
+#searchInputContent {
+    display: flex;
+    flex-direction: row;
+    background-color: transparent;
+    border: none;
+    flex-grow: 1;
+
+}
+
+input:focus{
+    outline: none;
+}
+
+.dropdown-menu {
+
+}
+
+#searchCategoryDropdown .dropdown-toggle {
+    background-color: transparent;
+    border: none;
+    color: black;
+}
+
+#musicContainer {
+    margin-top: 1.5rem;
+}
+
+.musicWrapper {
+    background: #f3f3f3;
+    margin-bottom: 0.8rem;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+
+}
+
+.musicUpperWrapper {
+    display: flex;
+}
+
+.musicLeftWrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.musicTitle {
+    font-size: 1.8rem;
+}
+.musicArtist {
+    font-size: 1.4rem;
+}
+
+.openDetail {
+    flex-shrink: 0;
+    cursor: pointer;
+    margin: auto;
+    padding: 0rem 0.5rem;
+    font-size: 1.5rem;
+}
+
+.goWriteButton {
+    margin: 1rem 2rem 0.5rem;
+}
+
+.inputLabel {
+    font-size: 1.5rem;
+}
+
+.customInput {
+    font-size: 1.3rem;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+}
+
+#writeButtonWrapper {
+    text-align: right;
+}
+
+.writeButton {
+    margin-bottom: 1rem;
+}
+
+.musicThumbnail {
+
+    /*background-position: 400px -55px;*/
+    width: 125px; height: 125px;
+    object-fit: cover;
+
+}
+
+.musicThumbnailWrapper {
+    flex-shrink: 0;
+    margin-right: 0.5rem;
+}
+
+.collapseDetail {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.youtubeFrame {
+    margin: 0 auto;
+}
+
+.underButtonWrapper {
+    margin-top: 0.7rem;
+    display: flex;
+    justify-content: center;
+}
+.goEditButton {
+    margin-right: 1rem;
+}
+
+#musicNotFoundMessage{
+    font-size: 1.3rem;
+    text-align: center;
+    margin: 2rem 0;
+}

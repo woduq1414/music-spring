@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
+    <script src="https://kit.fontawesome.com/43798b0c81.js" crossorigin="anonymous"></script>
+
+
+    <script src="https://kit.fontawesome.com/43798b0c81.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap" rel="stylesheet">
+
+    <link href="resources/css/default.css" rel="stylesheet">
+</head>
+<body>
+<div id="wrapper">
+    <div id="indexContainer" class="shadowContainer">
+        <div id="searchWrapper" class="">
+
+            <div class="btn-group" id="searchCategoryDropdown" th:data="${type}">
+                <button
+                        th:text="${type} == 'artist' ? '아티스트' : '제목'"
+                        type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    제목
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item" type="button" data="title">제목</button>
+                    <button class="dropdown-item" type="button" data="artist">아티스트</button>
+                </div>
+            </div>
+
+
+            <input class="" id="searchInputContent" th:value="${q}">
+            </input>
+
+
+            <div class="" id="searchButton">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </div>
+        </div>
+
+        <div id="musicContainer">
+            <div class="musicWrapper" th:each="music : ${list}" th:data="${music.id}">
+
+
+
+                <div class="musicUpperWrapper" >
+
+
+                    <div class="musicThumbnailWrapper ">
+                        <img th:src="'https://i.ytimg.com/vi/' + ${music.videoCode} + '/hqdefault.jpg'" class="img-thumbnail musicThumbnail">
+                    </div>
+
+                    <div class="musicLeftWrapper">
+                        <div class="musicTitle" th:text="${music.title}">
+
+                        </div>
+                        <div class="musicArtist" th:text="${music.artist}">
+
+                        </div>
+                    </div>
+
+
+                    <a class="openDetail" data-toggle="collapse" role="button" aria-expanded="false"
+                       aria-controls="collapseExample">
+                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <div class="collapse collapseDetail" style="">
+                    <iframe class="youtubeFrame" width="560" height="315" th:src="'https://www.youtube.com/embed/' + ${music.videoCode}" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+
+
+                    <div class="underButtonWrapper">
+                        <button class="goEditButton btn btn-outline-secondary">
+                            유튜브 링크 수정
+                        </button>
+                        <button class="deleteButton btn btn-outline-danger">
+                            음악 삭제
+                        </button>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div th:if="${#lists.isEmpty(list)}" id="musicNotFoundMessage">
+                아무것도 찾지 못했어요!
+            </div>
+
+        </div>
+        <button type="button" class="btn btn-outline-primary goWriteButton">음악 추가</button>
+    </div>
+</div>
+
+<script>
+
+
+
+
+    $(".goWriteButton").on("click", function () {
+        location.href = `/music/write`;
+    })
+
+    $(".openDetail").on("click", function (){
+        $temp = $(this).children("i");
+        $temp.toggleClass("fa-angle-down");
+        $temp.toggleClass("fa-angle-up");
+    })
+
+
+    function search() {
+        location.href = `/search?q=${$("#searchInputContent").val().trim()}&type=${$("#searchCategoryDropdown").attr("data".trim())}`
+    }
+
+    $("#searchCategoryDropdown .dropdown-item").on("click", function () {
+        $("#searchCategoryDropdown").attr("data", $(this).attr("data"))
+        // alert($(this).text())
+        $("#searchCategoryDropdown .dropdown-toggle").text($(this).text())
+    })
+
+
+    $("#searchInputContent").on("keyup", function (key) {
+
+
+        if (key.keyCode === 13) {
+            search();
+        }
+    })
+
+
+    $("#searchButton").on("click", function () {
+        search();
+    })
+
+    $(".openDetail").on("click", function () {
+
+        let $temp = $(this).parents(".musicWrapper").find(".collapseDetail");
+        if ($temp.hasClass("show")) {
+            $temp.collapse("hide");
+        } else {
+            $temp.collapse("show");
+        }
+
+    })
+
+    $(".goEditButton").on("click", function (){
+        let musicId = $(this).parents(".musicWrapper").attr("data");
+
+        location.href = `/music/edit?id=${musicId}`;
+    })
+    $(".deleteButton").on("click", function (){
+        let musicId = $(this).parents(".musicWrapper").attr("data");
+
+        let ans = confirm("정말로 삭제하시겠어요?");
+        if(ans == true){
+            $.ajax({
+                type: "POST",
+                url: "/music/delete",
+                data: {
+                    id: musicId
+                },
+
+            }).done(function (data) {
+                location.href = location.href;
+            })
+        }
+    })
+
+
+
+
+</script>
+</body>
+</html>
