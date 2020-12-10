@@ -79,9 +79,9 @@
                 </div>
 
                 <div class="collapse collapseDetail" style="">
-                    <iframe class="youtubeFrame" width="560" height="315" th:src="'https://www.youtube.com/embed/' + ${music.videoCode}" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
+                    <div class="iframeWrapper" th:data="'https://www.youtube.com/embed/' + ${music.videoCode}" toggle="false">
+
+                    </div>
 
 
                     <div class="underButtonWrapper">
@@ -154,7 +154,18 @@
             $temp.collapse("hide");
         } else {
             $temp.collapse("show");
+            if($temp.children(".iframeWrapper").attr("toggle") == "false"){
+                $temp.children(".iframeWrapper").html(
+                    `<iframe class="youtubeFrame" width="560" height="315" frameborder="0" src="${$temp.children(".iframeWrapper").attr("data")}"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                    `
+                )
+                $temp.children(".iframeWrapper").attr("toggle", "true");
+            }
         }
+
+
 
     })
 
