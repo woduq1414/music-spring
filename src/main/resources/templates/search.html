@@ -105,7 +105,7 @@
             </div>
 
         </div>
-        <ul class="pagination">
+        <ul class="pagination" th:if="${not #lists.isEmpty(list)}">
 
             <li class="page-item" th:each="p: ${#numbers.sequence(1, maxPage)}" th:classappend="${page == p}? active" >
                 <a class="page-link" th:data="${p}" th:text="${p}" href="#">

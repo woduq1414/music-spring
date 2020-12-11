@@ -35,7 +35,9 @@ public class MusicController {
         try {
             url = new URL(urlString);
         } catch (MalformedURLException e) {
+
             e.printStackTrace();
+            return null;
         }
         System.out.println(url.getHost());
 
@@ -94,7 +96,7 @@ public class MusicController {
 
         model.addAttribute("page",page);
 
-        if(page < 1 || page > maxPage){
+        if(m.size() > 0 && (page < 1 || page > maxPage) ){
             return "redirect:/";
         }
 
