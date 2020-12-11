@@ -28,7 +28,7 @@ public class JPAMusicRepository implements MusicRepository {
     @Override
     public ArrayList<Music> findByTitle(String title) {
         ArrayList<Music> list = (ArrayList)em.createQuery
-                ("select m from Music m where m.title like :title", Music.class)
+                ("select m from Music m where m.title like :title order by m.id desc", Music.class)
                 .setParameter("title","%"+title+"%").getResultList();
         return list;
     }
@@ -39,7 +39,7 @@ public class JPAMusicRepository implements MusicRepository {
     @Override
     public ArrayList<Music> findByArtist(String artist) {
         ArrayList<Music> list = (ArrayList)em.createQuery
-                ("select m from Music m where m.artist like :artist", Music.class)
+                ("select m from Music m where m.artist like :artist order by m.id desc", Music.class)
                 .setParameter("artist","%"+artist+"%").getResultList();
         return list;
     }
