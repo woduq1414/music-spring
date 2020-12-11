@@ -50,16 +50,17 @@
             </div>
         </div>
 
+
         <div id="musicContainer">
             <div class="musicWrapper" th:each="music : ${list}" th:data="${music.id}">
 
 
-
-                <div class="musicUpperWrapper" >
+                <div class="musicUpperWrapper">
 
 
                     <div class="musicThumbnailWrapper ">
-                        <img th:src="'https://i.ytimg.com/vi/' + ${music.videoCode} + '/hqdefault.jpg'" class="img-thumbnail musicThumbnail">
+                        <img th:src="'https://i.ytimg.com/vi/' + ${music.videoCode} + '/hqdefault.jpg'"
+                             class="img-thumbnail musicThumbnail">
                     </div>
 
                     <div class="musicLeftWrapper">
@@ -79,7 +80,8 @@
                 </div>
 
                 <div class="collapse collapseDetail" style="">
-                    <div class="iframeWrapper" th:data="'https://www.youtube.com/embed/' + ${music.videoCode}" toggle="false">
+                    <div class="iframeWrapper" th:data="'https://www.youtube.com/embed/' + ${music.videoCode}"
+                         toggle="false">
 
                     </div>
 
@@ -103,20 +105,54 @@
             </div>
 
         </div>
+        <ul class="pagination">
+
+            <li class="page-item" th:each="p: ${#numbers.sequence(1, maxPage)}" th:classappend="${page == p}? active" >
+                <a class="page-link" th:data="${p}" th:text="${p}" href="#">
+
+                </a>
+
+            </li>
+
+<!--            <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--            <li class="page-item active">-->
+<!--          <span class="page-link">-->
+<!--            2-->
+<!--            <span class="sr-only">(current)</span>-->
+<!--          </span>-->
+<!--            </li>-->
+<!--            <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+
+        </ul>
+
         <button type="button" class="btn btn-outline-primary goWriteButton">음악 추가</button>
     </div>
 </div>
 
+
+<script th:inline="javascript">
+
+    /*<![CDATA[*/
+
+    let q = /*[[ ${q} ]]*/;
+    let type = /*[[ ${type} ]]*/;
+
+    /*]]*/
+
+
+
+</script>
+
+
+
 <script>
-
-
 
 
     $(".goWriteButton").on("click", function () {
         location.href = `/music/write`;
     })
 
-    $(".openDetail").on("click", function (){
+    $(".openDetail").on("click", function () {
         $temp = $(this).children("i");
         $temp.toggleClass("fa-angle-down");
         $temp.toggleClass("fa-angle-up");
@@ -154,9 +190,9 @@
             $temp.collapse("hide");
         } else {
             $temp.collapse("show");
-            if($temp.children(".iframeWrapper").attr("toggle") == "false"){
+            if ($temp.children(".iframeWrapper").attr("toggle") == "false") {
                 $temp.children(".iframeWrapper").html(
-                    `<iframe class="youtubeFrame" width="560" height="315" frameborder="0" src="${$temp.children(".iframeWrapper").attr("data")}"
+                    `<iframe class="youtubeFrame"   frameborder="0" src="${$temp.children(".iframeWrapper").attr("data")}"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen></iframe>
                     `
@@ -166,19 +202,18 @@
         }
 
 
-
     })
 
-    $(".goEditButton").on("click", function (){
+    $(".goEditButton").on("click", function () {
         let musicId = $(this).parents(".musicWrapper").attr("data");
 
         location.href = `/music/edit?id=${musicId}`;
     })
-    $(".deleteButton").on("click", function (){
+    $(".deleteButton").on("click", function () {
         let musicId = $(this).parents(".musicWrapper").attr("data");
 
         let ans = confirm("정말로 삭제하시겠어요?");
-        if(ans == true){
+        if (ans == true) {
             $.ajax({
                 type: "POST",
                 url: "/music/delete",
@@ -187,12 +222,14 @@
                 },
 
             }).done(function (data) {
-                location.href = location.href;
+                location.href = `/search?q=${$("#searchInputContent").val().trim()}&type=${$("#searchCategoryDropdown").attr("data".trim())}`;
             })
         }
     })
 
-
+    $(".page-link").on("click",function (){
+        location.href = `/search?q=${q}&type=${type}&page=${$(this).attr("data")}`;
+    })
 
 
 </script>

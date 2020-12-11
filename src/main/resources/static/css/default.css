@@ -37,7 +37,9 @@ body, main {
 
 
 #indexContainer {
+
     width: 800px;
+    max-width: 92%;
     display: flex;
     flex-direction: column;
     border-radius: 15px;
@@ -124,7 +126,7 @@ input:focus{
 #musicContainer {
     margin-top: 1.5rem;
     overflow-y: auto;
-    max-height: calc(80vh - 80px);
+    max-height: calc(80vh - 110px);
 }
 
 .musicWrapper {
@@ -162,7 +164,7 @@ input:focus{
 }
 
 .goWriteButton {
-    margin: 1rem 2rem 0.5rem;
+    margin: 0.7rem 2rem 0.5rem;
 }
 
 .inputLabel {
@@ -205,6 +207,11 @@ input:focus{
 
 .youtubeFrame {
     margin: 0 auto;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
 }
 
 .underButtonWrapper {
@@ -242,4 +249,15 @@ input:focus{
 
 .iframeWrapper {
     text-align: center;
+    position:relative;
+    padding-top:56.25%;
+}
+
+.pagination {
+    margin: 0.7rem auto 0 auto;
+    display: flex;
+}
+
+.page-link {
+
 }

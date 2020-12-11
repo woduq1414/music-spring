@@ -61,11 +61,17 @@ public class MusicController {
 
 
     @GetMapping("/search")
-    public String search(@RequestParam("q") String q, @RequestParam("type") String type, Model model)
+    public String search(@RequestParam(value="q", defaultValue = "") String q,
+                         @RequestParam(value="type",  defaultValue = "title") String type,
+                         @RequestParam(value="page",  defaultValue = "1") int page,
+                         Model model)
     {
         System.out.println(q);
         System.out.println(type);
         ArrayList<Music> m;
+
+        final int pageSize = 10;
+
         switch (type){
             case "title":
 
@@ -82,7 +88,17 @@ public class MusicController {
                 return "redirect:/";
 
         }
-        model.addAttribute("list",m);
+
+        int maxPage = Math.floorDiv(m.size() - 1, pageSize) + 1;
+        model.addAttribute("maxPage", maxPage);
+
+        model.addAttribute("page",page);
+
+        if(page < 1 || page > maxPage){
+            return "redirect:/";
+        }
+
+        model.addAttribute("list",m.subList((page - 1) * pageSize, Math.min(page * pageSize, m.size())));
         model.addAttribute("q",q);
         model.addAttribute("type",type);
 
