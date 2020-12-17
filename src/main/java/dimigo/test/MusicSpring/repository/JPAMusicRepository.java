@@ -13,6 +13,8 @@ public class JPAMusicRepository implements MusicRepository {
         this.em = em;
     }
 
+
+    //음악 등록
     @Override
     public Music save(Music music) {
         em.persist(music);
@@ -25,6 +27,8 @@ public class JPAMusicRepository implements MusicRepository {
         return m;
     }
 
+
+    //제목으로 찾기
     @Override
     public ArrayList<Music> findByTitle(String title) {
         ArrayList<Music> list = (ArrayList)em.createQuery
@@ -34,8 +38,7 @@ public class JPAMusicRepository implements MusicRepository {
     }
 
 
-
-
+    //아티스트로 찾기
     @Override
     public ArrayList<Music> findByArtist(String artist) {
         ArrayList<Music> list = (ArrayList)em.createQuery
@@ -45,15 +48,19 @@ public class JPAMusicRepository implements MusicRepository {
     }
 
 
+    //비디오 코드 수정
     @Override
     public void updateVideoCode(Music music, String videoCode) {
         music.setVideoCode(videoCode);
     }
 
+
+    //음악 삭제
     @Override
     public void deleteMusic(Music music) {
         em.remove(music);
     }
+
 
 
     @Override

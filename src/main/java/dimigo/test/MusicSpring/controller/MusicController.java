@@ -26,7 +26,7 @@ public class MusicController {
         this.ms = ms;
     }
 
-
+    // 유튜브 url -> 비디오 코드만 추출하는 함수
     public String parseVideoCode(String urlString){
 
         URL url = null;
@@ -61,7 +61,7 @@ public class MusicController {
         return videoCode;
     }
 
-
+    // 검색 페이지
     @GetMapping("/search")
     public String search(@RequestParam(value="q", defaultValue = "") String q,
                          @RequestParam(value="type",  defaultValue = "title") String type,
@@ -108,6 +108,8 @@ public class MusicController {
         return "search";
     }
 
+
+    // 음악 추가 폼
     @GetMapping("/music/write")
     public String musicWriteForm(MusicForm mf)
     {
@@ -115,6 +117,8 @@ public class MusicController {
         return "writeMusic";
     }
 
+
+    //음악 수정 폼
     @GetMapping("/music/edit")
     public String musicEditForm(@RequestParam("id") int id, Model model)
     {
@@ -122,6 +126,7 @@ public class MusicController {
         return "editMusic";
     }
 
+    //음악 수정 처리
     @PostMapping("/music/edit")
     public RedirectView musicEdit(MusicForm mf)
     {
@@ -152,6 +157,8 @@ public class MusicController {
         return new RedirectView("/search?q=" + encodedTitle + "&type=title");
     }
 
+
+    //음악 삭제 처리
     @PostMapping("/music/delete")
     public String musicDelete(MusicForm mf)
     {
@@ -172,7 +179,7 @@ public class MusicController {
     }
 
 
-
+    //음악 등록 처리
     @PostMapping("/music/add")
     public String register(MusicForm mf)
     {
@@ -209,12 +216,6 @@ public class MusicController {
 
         return "redirect:/search?q=" + encodedTitle + "&type=title";
     }
-    @GetMapping("/music")
-    public String musicList(Model model)
-    {
-        ArrayList<Music> m = ms.findMembers();
-        model.addAttribute("list",m);
-        return "musicList";
-    }
+
 
 }
