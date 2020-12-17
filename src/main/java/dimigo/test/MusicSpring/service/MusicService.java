@@ -18,7 +18,7 @@ public class MusicService {
         this.musicRepository = musicRepository;
     }
 
-    public int register(Music m)
+    public int register(Music m)ㅌ
     {
         musicRepository.save(m);
         return m.getId();
@@ -28,12 +28,12 @@ public class MusicService {
         return musicRepository.findAll();
     }
 
-    public ArrayList<Music> findByTitle(String title)
+    public ArrayList<Music> findByTitle(String title) //제목으로 검색
     {
         return musicRepository.findByTitle(title);
     }
 
-    public ArrayList<Music> findByArtist(String artist)
+    public ArrayList<Music> findByArtist(String artist) //아티스트로 검색
     {
         return musicRepository.findByArtist(artist);
     }
@@ -48,9 +48,9 @@ public class MusicService {
     public void updateVideoCode(Music music, String videoCode)
     {
         musicRepository.updateVideoCode(music, videoCode);
-    }
+    }//음악 등록
     public void deleteMusic(Music music){
         musicRepository.deleteMusic(music);
-    }
+    }//음악 삭제
 
 }
