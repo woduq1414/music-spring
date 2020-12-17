@@ -26,12 +26,12 @@ public class SpringConfigure {
     }
 
     @Bean
-    public MusicService memberService()
+    public MusicService musicService()
     {
-        return new MusicService(memberRepository());
+        return new MusicService(musicRepository());
     }
     @Bean
-    public MusicRepository memberRepository()
+    public MusicRepository musicRepository()
     {
         //return new MemoryMemberRepository();
         //return new JDBCMemberRepository(dataSource);
